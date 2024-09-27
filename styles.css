@@ -1,0 +1,97 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Background: Ensure full-screen responsive background */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url('bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Dashboard wrapper */
+.wrapper {
+  width: 90%;
+  max-width: 1000px;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+  border-radius: 15px;
+  padding: 30px;
+  color: white;
+  text-align: center;
+}
+
+.wrapper h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Table Container */
+.table-container {
+  overflow-x: auto; /* Ensure table scrolls on smaller screens */
+  margin-top: 20px;
+}
+
+/* Styling the table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+table, th, td {
+  border: 2px solid rgba(255, 255, 255, 0.3); /* Thicker, clearer borders */
+  padding: 12px;
+  text-align: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark table rows */
+}
+
+th {
+  background-color: rgba(255, 255, 255, 0.2); /* Slightly lighter for headers */
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+td {
+  font-size: 1rem;
+}
+
+/* Alternate row colors */
+tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Checkbox styling */
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #4caf50; /* Green when checked */
+  border-radius: 3px;
+}
+
+input[type="checkbox"]:hover {
+  background-color: #ccc; /* Hover effect */
+}
+
+/* Make table responsive for smaller screens */
+@media screen and (max-width: 768px) {
+  .wrapper {
+    width: 100%;
+  }
+  th, td {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+}

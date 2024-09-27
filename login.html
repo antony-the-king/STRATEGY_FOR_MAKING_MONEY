@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form</title>
+  <link rel="stylesheet" href="copy.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <form action="/login" method="POST">
+      <h1>Login</h1>
+      <div class="input-box">
+        <input type="text" name="username" placeholder="Username" required>
+      </div>
+      <div class="input-box">
+        <input type="password" name="password" placeholder="Password" required>
+      </div>
+
+      <!-- Error message section -->
+      <div id="error-message">
+        <!-- This will display error message if login failed -->
+        <p style="color:rgb(221, 255, 0);">
+          <script>
+            // Check if there's an error message from the server via query parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const error = urlParams.get('error');
+            if (error) {
+              document.write('Incorrect credentials, please try again.');
+            }
+          </script>
+        </p>
+      </div>
+
+      <button type="submit" class="btn">Login</button>
+      <div class="register-link">
+        <p>Don't have an account? <a href="index.html">Register</a></p>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

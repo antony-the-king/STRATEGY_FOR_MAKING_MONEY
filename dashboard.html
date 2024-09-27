@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Balance Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="wrapper dashboard-wrapper">
+        <h1>Balance Dashboard</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Current Balance</th>
+                        <th>Daily Target (2%)</th>
+                        <th>Expected Balance</th>
+                        <th>Completed</th> <!-- New column for checkboxes -->
+                    </tr>
+                </thead>
+                <tbody id="balance-table-body">
+                    <!-- Dynamic content will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const days = 600; // Number of days to display
+        let currentBalance = 10; // Starting balance
+        const dailyIncreasePercentage = 0.02; // Daily increase of 2%
+
+        // Function to generate table rows with checkboxes
+        function generateTableRows() {
+            const tableBody = document.getElementById('balance-table-body');
+            let htmlContent = '';
+
+            for (let day = 1; day <= days; day++) {
+                let dailyTarget = currentBalance * dailyIncreasePercentage;
+                let expectedBalance = currentBalance + dailyTarget;
+
+                // Check if the day was marked as completed
+                let isChecked = localStorage.getItem(`day-${day}`) === 'true' ? 'checked' : '';
+
+                // Add the row with the checkbox
+                htmlContent += `<tr>
+                    <td>${day}</td>
+                    <td>${currentBalance.toFixed(2)}</td>
+                    <td>${dailyTarget.toFixed(2)}</td>
+                    <td>${expectedBalance.toFixed(2)}</td>
+                    <td>
+                        <input type="checkbox" class="day-checkbox" data-day="${day}" ${isChecked}>
+                    </td>
+                </tr>`;
+
+                // Update balance for the next day
+                currentBalance = expectedBalance;
+            }
+
+            tableBody.innerHTML = htmlContent;
+
+            // Add event listeners to checkboxes
+            const checkboxes = document.querySelectorAll('.day-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const day = this.getAttribute('data-day');
+                    localStorage.setItem(`day-${day}`, this.checked);
+                });
+            });
+        }
+
+        // Call function to populate the table on page load
+        window.onload = generateTableRows;
+    </script>
+</body>
+</html>
